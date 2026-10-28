@@ -123,7 +123,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            core.setOutput('desc', repo.description?.trim() || 'A utility to clean system memory.');
+            const description = repo.description?.trim() || 'A utility to clean system memory.';
+            const armNote = 'Optimized for Windows on ARM, with native ARM64 execution on Windows 11 version 24H2 and later; the same portable executable supports x64.';
+            core.setOutput('desc', /optimized for windows on arm/i.test(description) ? description : `${description} ${armNote}`);
             core.setOutput('tags', repo.topics.join(' ') || 'memory ram cleaner optimization windows');
 
       - name: Generate Chocolatey package (embedded portable)
@@ -161,7 +163,7 @@ jobs:
               <releaseNotes>https://github.com/$($env:GH_REPO)/releases/tag/$($env:RELEASE_TAG)</releaseNotes>
               <licenseUrl>https://github.com/$($env:GH_REPO)/blob/main/LICENSE</licenseUrl>
               <bugTrackerUrl>https://github.com/$($env:GH_REPO)/issues</bugTrackerUrl>
-              <tags>portable admin $($env:METADATA_TAGS)</tags>
+              <tags>portable admin arm64 windows-on-arm $($env:METADATA_TAGS)</tags>
               <summary>$($env:METADATA_DESC)</summary>
               <description>$($env:METADATA_DESC)</description>
             </metadata>

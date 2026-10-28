@@ -98,7 +98,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            core.setOutput('desc', repo.description?.trim() || "This free RAM cleaner uses native Windows features to optimize memory areas. It's a compact, portable, and smart application.");
+            const description = repo.description?.trim() || "This free RAM cleaner uses native Windows features to optimize memory areas. It's a compact, portable, and smart application.";
+            const armNote = 'Optimized for Windows on ARM: native ARM64 execution on Windows 11 version 24H2 and later; the same portable executable supports x64.';
+            const fullDescription = /optimized for windows on arm/i.test(description) ? description : `${description} ${armNote}`;
+            core.setOutput('desc', fullDescription.length <= 256 ? fullDescription : `${fullDescription.slice(0, 254 - armNote.length).trimEnd()}… ${armNote}`);
             core.setOutput('homepage', repo.homepage?.trim() || repo.html_url || 'https://github.com/IgorMundstein/WinMemoryCleaner');
             core.setOutput('license', repo.license?.spdx_id || 'GPL-3.0');
 
@@ -112,12 +115,17 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
+            const armTags = ['ARM64', 'Windows on ARM'];
             let topics = (data.names || []).map(s => s.trim()).filter(Boolean);
+            topics = topics.filter(t => !armTags.some(tag => tag.toLowerCase() === t.toLowerCase()));
+            topics.push(...armTags);
             topics = Array.from(new Set(topics));
             topics.sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
             if (topics.length > 16) {
-              const dropped = topics.slice(16);
-              topics = topics.slice(0, 16);
+              const armTopics = topics.filter(t => armTags.includes(t));
+              const otherTopics = topics.filter(t => !armTags.includes(t));
+              const dropped = otherTopics.slice(0, Math.max(0, topics.length - 16));
+              topics = [...otherTopics.slice(dropped.length), ...armTopics].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
               core.notice(`Dropped Tags due to 16-item schema limit: ${dropped.join(', ')}`);
             }
             const fs = require('fs');
@@ -154,6 +162,7 @@ jobs:
           PackageVersion: ${{ steps.get_release.outputs.version }}
           InstallerType: portable
           Installers:
+            # The AnyCPU executable is shared across Windows architectures.
             - Architecture: neutral
               InstallerUrl: https://github.com/${{ github.repository }}/releases/download/${{ steps.get_release.outputs.tag }}/${{ env.BINARY_NAME }}.exe
               InstallerSha256: ${{ steps.download.outputs.sha256 }}
@@ -179,7 +188,8 @@ jobs:
           License: ${{ steps.metadata.outputs.license }}
           LicenseUrl: https://github.com/${{ github.repository }}/blob/main/LICENSE
           Copyright: Copyright (c) 2019 - $current_year ${{ env.PUBLISHER }}
-          ShortDescription: ${{ steps.metadata.outputs.desc }}
+          ShortDescription: >-
+            ${{ steps.metadata.outputs.desc }}
           ReleaseNotesUrl: https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_release.outputs.tag }}
           EOF
           
@@ -279,12 +289,17 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
+            const armTags = ['ARM64', 'Windows on ARM'];
             let topics = (data.names || []).map(s => s.trim()).filter(Boolean);
+            topics = topics.filter(t => !armTags.some(tag => tag.toLowerCase() === t.toLowerCase()));
+            topics.push(...armTags);
             topics = Array.from(new Set(topics));
             topics.sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
             if (topics.length > 16) {
-              const dropped = topics.slice(16);
-              topics = topics.slice(0, 16);
+              const armTopics = topics.filter(t => armTags.includes(t));
+              const otherTopics = topics.filter(t => !armTags.includes(t));
+              const dropped = otherTopics.slice(0, Math.max(0, topics.length - 16));
+              topics = [...otherTopics.slice(dropped.length), ...armTopics].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
               core.notice(`Dropped Tags due to 16-item schema limit: ${dropped.join(', ')}`);
             }
             const fs = require('fs');

@@ -4,7 +4,7 @@
 
 WMC is a free RAM cleaner that effectively optimizes memory areas by utilizing the native Windows API. This can help improve performance when programs do not properly release allocated memory. Featuring a user-friendly interface and intelligent functionality, this portable application requires no installation; however, it does need administrator privileges to run.
 
-The same portable executable runs natively on x64 Windows and on Windows 11 version 24H2 and later ARM64. Earlier Windows 11 ARM64 versions run it through x64 emulation. It requires .NET Framework 4.8.1, included with Windows 11 version 22H2 and later and Windows Server 2025; Windows 11 version 21H2, Windows 10 version 22H2 x64, and Windows Server 2022 may need the framework installed. Windows 10 ARM64 is not a native target.
+Optimized for Windows on ARM: the same portable executable runs natively on Windows 11 ARM64 version 24H2 and later, using .NET Framework 4.8.1's ARM64 runtime. It also runs on x64 Windows. Earlier Windows 11 ARM64 versions run it through x64 emulation. .NET Framework 4.8.1 is included with Windows 11 version 22H2 and later and Windows Server 2025; Windows 11 version 21H2, Windows 10 version 22H2 x64, and Windows Server 2022 may need the framework installed. Windows 10 ARM64 is not a native target.
 
 [![](./docs/assets/images/main-window.png)](#windows-memory-cleaner)
 
@@ -33,6 +33,8 @@ scoop install extras/winmemorycleaner
 ```cmd
 winget install IgorMundstein.WinMemoryCleaner
 ```
+
+Chocolatey, Scoop, and WinGet install the same architecture-neutral executable. Use the same package on x64 and Windows on ARM; a separate ARM64 package is not required.
 
 ## 🚀 Features
 
