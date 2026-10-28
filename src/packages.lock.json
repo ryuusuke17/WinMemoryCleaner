@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.0": {
+    ".NETFramework,Version=v4.8.1": {
       "Microsoft.CodeAnalysis.FxCopAnalyzers": {
         "type": "Direct",
         "requested": "[3.3.2, 3.3.2]",
@@ -32,11 +32,11 @@
         "resolved": "3.3.2",
         "contentHash": "NfmC8NoxrRtw2PSmqSu+kVTcsJuMhspxWKbVzrtPxw+O8hjpCPzD0IttCUJclDf36qkmScvvd1BgRHYE17zF9g=="
       },
-      "Microsoft.NETFramework.ReferenceAssemblies.net40": {
+      "Microsoft.NETFramework.ReferenceAssemblies.net481": {
         "type": "Direct",
         "requested": "[1.0.3, 1.0.3]",
         "resolved": "1.0.3",
-        "contentHash": "3ctXnCpHdoYJNH9ATfXKwckkkdHvHc1Xls12QB9kf1tjh3b+VzxtiwpkZN4GxOawakfH6CJAkqhlDKSiz6Ujbg=="
+        "contentHash": "Vv/20vgHS7VglVOVh8J3Iz/MA+VYKVRp9f7r2qiKBMuzviTOmocG70yq0Q8T5OTmCONkEAIJwETD1zhEfLkAXQ=="
       },
       "NUnit": {
         "type": "Direct",

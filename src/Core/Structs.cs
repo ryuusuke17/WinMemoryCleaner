@@ -15,12 +15,12 @@ namespace WinMemoryCleaner
             /// <summary>  
             /// Memory Combine Information Ex  
             /// </summary>
-            [StructLayout(LayoutKind.Sequential, Pack = 1)]
+            [StructLayout(LayoutKind.Sequential)]
             public struct MemoryCombineInformationEx
             {
                 public IntPtr Handle;
                 public IntPtr PagesCombined;
-                public long Flags;
+                public uint Flags;
             }
 
             /// <summary>  
@@ -74,20 +74,20 @@ namespace WinMemoryCleaner
             }
 
             /// <summary>  
-            /// System File Cache Information structure for x64 working set  
+            /// System File Cache Information structure for 64-bit working set
             /// </summary>  
-            [StructLayout(LayoutKind.Sequential, Pack = 1)]
+            [StructLayout(LayoutKind.Sequential)]
             public struct SystemFileCacheInformation64
             {
-                public long CurrentSize;
-                public long PeakSize;
-                public long PageFaultCount;
-                public long MinimumWorkingSet;
-                public long MaximumWorkingSet;
-                public long CurrentSizeIncludingTransitionInPages;
-                public long PeakSizeIncludingTransitionInPages;
-                public long TransitionRePurposeCount;
-                public long Flags;
+                public IntPtr CurrentSize;
+                public IntPtr PeakSize;
+                public uint PageFaultCount;
+                public IntPtr MinimumWorkingSet;
+                public IntPtr MaximumWorkingSet;
+                public IntPtr CurrentSizeIncludingTransitionInPages;
+                public IntPtr PeakSizeIncludingTransitionInPages;
+                public uint TransitionRePurposeCount;
+                public uint Flags;
             }
 
             /// <summary>  

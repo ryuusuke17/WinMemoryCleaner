@@ -58,6 +58,10 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || steps.check_files.outputs.any_changed == 'true'
         uses: microsoft/setup-msbuild@v2
 
+      - name: Setup NuGet
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || steps.check_files.outputs.any_changed == 'true'
+        uses: nuget/setup-nuget@v2
+
       - name: Restore NuGet packages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || steps.check_files.outputs.any_changed == 'true'
         shell: pwsh
@@ -81,7 +85,7 @@ jobs:
           }
           
           Write-Host "Running tests..."
-          & $testRunner $testAssembly /xml:TestResults.xml
+          & $testRunner $testAssembly /framework:net-4.0 /xml:TestResults.xml
           
           if ($LASTEXITCODE -ne 0) {
             Write-Host "::error::Tests failed with exit code $LASTEXITCODE"

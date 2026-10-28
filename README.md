@@ -1,8 +1,10 @@
 # Windows Memory Cleaner
 
-[![](https://img.shields.io/badge/WINDOWS-XP%20%E2%80%93%2011-blue?style=for-the-badge)](#windows-memory-cleaner) [![](https://img.shields.io/badge/SERVER-2003%20%E2%80%93%202025-blue?style=for-the-badge)](#windows-memory-cleaner) [![](https://img.shields.io/github/license/IgorMundstein/WinMemoryCleaner?color=2ea44f&style=for-the-badge)](/LICENSE) [![](https://img.shields.io/github/downloads/IgorMundstein/WinMemoryCleaner/total?color=orange&style=for-the-badge)](https://github.com/IgorMundstein/WinMemoryCleaner/releases/latest)
+[![](https://img.shields.io/badge/WINDOWS-10%20%E2%80%93%2011-blue?style=for-the-badge)](#windows-memory-cleaner) [![](https://img.shields.io/badge/SERVER-2022%20%E2%80%93%202025-blue?style=for-the-badge)](#windows-memory-cleaner) [![](https://img.shields.io/github/license/IgorMundstein/WinMemoryCleaner?color=2ea44f&style=for-the-badge)](/LICENSE) [![](https://img.shields.io/github/downloads/IgorMundstein/WinMemoryCleaner/total?color=orange&style=for-the-badge)](https://github.com/IgorMundstein/WinMemoryCleaner/releases/latest)
 
 WMC is a free RAM cleaner that effectively optimizes memory areas by utilizing the native Windows API. This can help improve performance when programs do not properly release allocated memory. Featuring a user-friendly interface and intelligent functionality, this portable application requires no installation; however, it does need administrator privileges to run.
+
+The same portable executable runs natively on x64 Windows and on Windows 11 version 24H2 and later ARM64. Earlier Windows 11 ARM64 versions run it through x64 emulation. It requires .NET Framework 4.8.1, included with Windows 11 version 22H2 and later and Windows Server 2025; Windows 11 version 21H2, Windows 10 version 22H2 x64, and Windows Server 2022 may need the framework installed. Windows 10 ARM64 is not a native target.
 
 [![](./docs/assets/images/main-window.png)](#windows-memory-cleaner)
 
@@ -356,9 +358,9 @@ This project exists to serve the users who were left behind by the march of tech
 - No third-party dependencies
 - Portable (Single executable file)
 - Right-to-left language support and bidirectional text
-- Use of S.O.L.I.D. principles in object-oriented programming (limited due to the legacy .NET 4.0 framework)
+- Use of S.O.L.I.D. principles in object-oriented programming with .NET Framework 4.8.1
 - Use of Windows API methods for memory management
-- Windows retro-compatibility (Windows XP, Server 2003, and later)
+- Support for Windows 10 version 22H2 (x64), Windows 11, Windows Server 2022, and Windows Server 2025 with .NET Framework 4.8.1; native ARM64 execution requires Windows 11 version 24H2 or later
 
 ### 💭 Where does the app save the settings?
 
