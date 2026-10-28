@@ -1,3 +1,11 @@
+### 3.0.9
+
+**2026-10-28**
+
+- Optimized for Windows on ARM with native ARM64 execution on Windows 11 version 24H2 and later.
+- Retargeted to .NET Framework 4.8.1 and corrected pointer-sized memory structure layouts for 64-bit systems.
+- Kept one architecture-neutral executable for x64 and ARM64 Windows.
+
 ### 3.0.8
 
 **2025-12-13**
